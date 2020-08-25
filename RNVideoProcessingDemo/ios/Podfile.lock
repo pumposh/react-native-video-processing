@@ -220,8 +220,6 @@ PODS:
     - React-cxxreact (= 0.61.5)
     - React-jsi (= 0.61.5)
     - ReactCommon/jscallinvoker (= 0.61.5)
-  - rn-fetch-blob (0.12.0):
-    - React-Core
   - RNProgressHud (1.2.0):
     - React
     - SVProgressHUD
@@ -260,7 +258,6 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
   - RNProgressHud (from `../node_modules/progress-hud/ios`)
   - RNVideoProcessing (from `../node_modules/react-native-video-processing`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -323,8 +320,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/Vibration"
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
-  rn-fetch-blob:
-    :path: "../node_modules/rn-fetch-blob"
   RNProgressHud:
     :path: "../node_modules/progress-hud/ios"
   RNVideoProcessing:
@@ -365,7 +360,6 @@ SPEC CHECKSUMS:
   React-RCTText: 9ccc88273e9a3aacff5094d2175a605efa854dbe
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
-  rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
   RNProgressHud: e0c0cecde5948339f31a1ce99efea08cafb1040f
   RNVideoProcessing: cda67217db87030a335137bfb0c637bce2532aeb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
@@ -373,4 +367,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 44698f04df9bf2df7a19f60191e3aeb37331063c
 
-COCOAPODS: 1.9.0.beta.3
+COCOAPODS: 1.9.1

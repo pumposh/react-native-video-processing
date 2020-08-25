@@ -1,7 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {VideoPlayer} from 'react-native-video-processing';
-import {bytesToSize} from './utils';
 
 export const Player = ({video}) => {
   return (

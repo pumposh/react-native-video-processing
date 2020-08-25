@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {
   FlatList,
   SafeAreaView,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -57,6 +56,26 @@ export const VideoProcessing = () => {
     RNProgressHud.dismiss();
   };
 
+  const onPressCompress = async () => {
+    const video = media[media.length -1];
+    if (!video) return;
+    RNProgressHud.showWithStatus('Processing Video');
+    const info = await ProcessingManager.getVideoInfo(video.uri);
+    const previewSize = videoPreviewSize(info.size);
+    const options = {
+      width: previewSize.width,
+      height: previewSize.height,
+      bitrateMultiplier: 3,
+      saveToCameraRoll: false, // default is false, iOS only
+      saveWithCurrentDate: true, // default is false, iOS only
+      minimumBitrate: 300000,
+      removeAudio: true, // default is false
+  };
+    const file = await ProcessingManager.compress(video.uri, options);
+    console.log(file)
+    RNProgressHud.dismiss();
+  }
+
   const renderItem = ({item}) => <Player video={item} />;
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -78,6 +97,12 @@ export const VideoProcessing = () => {
           disabled={!media.length}
           style={styles.importButton}>
           <Text>Compress Media</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={onPressCompress}
+          disabled={!media.length}
+          style={styles.importButton}>
+          <Text>ProcessingManager.compress</Text>
         </TouchableOpacity>
         <FlatList
           data={compressMedia}
