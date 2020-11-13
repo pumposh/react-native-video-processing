@@ -30,7 +30,7 @@ class RNVideoTrimmer: NSObject {
     let size = videoTrack!.naturalSize
 
     let txf: CGAffineTransform = videoTrack!.preferredTransform
-
+    
     if (size.width == txf.tx && size.height == txf.ty) {
       return .left;
     } else if (txf.tx == 0 && txf.ty == 0) {
@@ -190,7 +190,15 @@ class RNVideoTrimmer: NSObject {
       let quality = ((options.object(forKey: "quality") as? String) != nil) ? options.object(forKey: "quality") as! String : ""
       let saveToCameraRoll = options.object(forKey: "saveToCameraRoll") as? Bool ?? false
       let saveWithCurrentDate = options.object(forKey: "saveWithCurrentDate") as? Bool ?? false
-
+    
+      let inputOrientation : UIImage.Orientation? =
+        ((options.object(forKey: "videoOrientation") as? String != nil) ?
+            (options.object(forKey: "videoOrientation") as? String == "landscapeLeft")      ? .left :
+            (options.object(forKey: "videoOrientation") as? String == "landscapeRight")     ? .right  :
+            (options.object(forKey: "videoOrientation") as? String == "portrait")           ? .up    :
+            (options.object(forKey: "videoOrientation") as? String == "portraitUpsideDown") ? .down  :
+        nil : nil)
+    
       let manager = FileManager.default
       guard let documentDirectory = try? manager.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
           else {
@@ -219,8 +227,8 @@ class RNVideoTrimmer: NSObject {
 
         let composition = AVMutableComposition()
         let track = composition.addMutableTrack(withMediaType: .video, preferredTrackID: Int32(kCMPersistentTrackID_Invalid))
-        let videoOrientation = self.getVideoOrientationFromAsset(asset: asset)
-
+        let videoOrientation = inputOrientation != nil ?
+            inputOrientation : self.getVideoOrientationFromAsset(asset: asset)
         if ( videoOrientation == .up  ) {
           var transforms: CGAffineTransform?
           transforms = track?.preferredTransform
